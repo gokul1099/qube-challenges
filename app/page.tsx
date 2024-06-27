@@ -1,16 +1,21 @@
+
+"use client"
+import TableItem from "../components/TableItem";
 import { STATUS,STATUS_COLOR,DEVICE_LIST_HEADER } from "../contants";
+import { Appliance } from "../types";
 import { fetchData } from "../utils/fetchData";
 import React, { useEffect } from "react";
+import Link from "next/link";
 export default function Home() {
   
-  const [deviceData,setDeviceData] = React.useState([])
+  const [deviceData,setDeviceData] = React.useState<Appliance[]>([])
 
   useEffect(()=>{
     const getData = async()=>{
       try{
-        const res = await fetch(`${process.env.BASE_URL}/appliances`)
+        const res = await fetch(`http://0.0.0.0:3001/api/v1/appliances`)
         const data =await res.json()
-        setDeviceData(data)
+        setDeviceData(data?.appliances)
       }
       catch(e){
         console.log(e)
@@ -40,21 +45,36 @@ export default function Home() {
             })
           }
       </div>
-      {/** Device List Table */}
+      {/** Device List Table Header*/}
       <div className="flex flex-col bg-white m-5 p-3">
         <div className="mb-5">
           <input placeholder="Search" className="border-2"/>
         </div>
-        <div className="flex flex-row justify-between">
-        {
-          DEVICE_LIST_HEADER?.map((header)=>{
-            return(
-              <div>
-                <h2>{header}</h2>
-              </div>
-            )
-          })
-        }
+        <div className="flex overflow-x-auto">
+          <table className="w-full text-left">
+            <thead className="border-b-2 border-b-slate-200">
+              <tr>
+                {
+                  DEVICE_LIST_HEADER?.map((header)=>{
+                    return(
+                        <th>{header}</th>
+                    )
+                  })
+                }
+                <th></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+              {
+                deviceData?.map((device)=>{
+                  return(
+                    <TableItem {...device}/>
+                  )
+                })
+              }
+          </tbody>
+          </table>
         </div>
       </div>
     </main>
