@@ -10,14 +10,14 @@ export const STATUS = [
 ]
 
 export const STATUS_COLOR:{[key: string] : string} = {
-    "Failed" :"red",
-    "Stalled":"red",
-    "Archived":"red",
-    "Cancelled":"yellow",
-    "Scheduled":"yellow",
-    "Unarchiving":"blue",
-    "Downloading":"blue",
-    "Downloaded":"green"
+    "Failed" :"bg-red-600",
+    "Stalled":"bg-red-600",
+    "Archived":"bg-red-600",
+    "Cancelled":"bg-yellow-500",
+    "Scheduled":"bg-yellow-500",
+    "Unarchiving":"bg-blue-700",
+    "Downloading":"bg-blue-700",
+    "Downloaded":"bg-green-800"
 }
 export const DEVICE_LIST_HEADER = [
     "Device Serial",

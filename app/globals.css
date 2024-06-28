@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 
+.device-detail{
+    @apply w-56 m-5
+}

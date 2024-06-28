@@ -1,6 +1,7 @@
 import React from 'react'
 import { Appliance } from '../types'
 import { useRouter } from 'next/navigation'
+import { STATUS_COLOR } from '../contants'
 function TableItem({serialNo,theatreName,location,bandwidth,avgBandwidth,deviceStatus,downloadStatus,osVersion}:Appliance) {
     const router = useRouter()
   return (
@@ -8,7 +9,7 @@ function TableItem({serialNo,theatreName,location,bandwidth,avgBandwidth,deviceS
         {/* <Link href={`/device?${serialNo}`}> */}
         <td className='text-left'>
             <h3 className='text-xs'>{serialNo}</h3></td>
-        <td>
+        <td className="p-3">
             <div className='text-left'>
                 <h3 className='text-xs'>{theatreName}</h3>
             </div>
@@ -24,12 +25,20 @@ function TableItem({serialNo,theatreName,location,bandwidth,avgBandwidth,deviceS
                 <h3 className='text-xs'>{avgBandwidth}</h3>
             </div>
         </td>
-        <td  className='text-left p-'>
-            <h3 className='text-xs'>{deviceStatus}</h3>
+        <td  className='text-left '>
+            <div className='flex flex-row items-center'>
+                <div className={`h-2 w-2 rounded-xl ${deviceStatus === "Offline" ? "bg-red-600" : "bg-green-600"}`}></div>
+                <h3 className='text-xs ml-1'>{deviceStatus}</h3>
+            </div>
+            
         </td>
-        <td  className='text-left'>
-            <h3 className='text-xs'>{downloadStatus}</h3>
-        </td >
+        <td  className='text-left '>
+            <div className='flex flex-row items-center'>
+                <div className={`h-2 w-2 rounded-xl ${STATUS_COLOR[downloadStatus]}`}></div>
+                <h3 className='text-xs ml-1'>{downloadStatus}</h3>
+            </div>
+            
+        </td>
         <td  className='text-left'>
                 <div><h3 className='text-xs'>{osVersion}</h3></div>           
         </td>
