@@ -27,3 +27,9 @@ export const DEVICE_LIST_HEADER = [
     "Download Status",
     "OS Version"
 ]
+
+export const DEVICE_PAGE_TITLES=[
+    "Details",
+    "Content",
+    "Bandwidth"
+]

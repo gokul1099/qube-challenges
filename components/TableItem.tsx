@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 function TableItem({serialNo,theatreName,location,bandwidth,avgBandwidth,deviceStatus,downloadStatus,osVersion}:Appliance) {
     const router = useRouter()
   return (
-    <tr onClick={()=>router.push(`/device?${serialNo}`)} className='cursor-pointer hover:bg-slate-200 border-spacing-5'>
+    <tr onClick={()=>router.push(`/device?device=${serialNo}`)} className='cursor-pointer hover:bg-slate-200 border-spacing-5'>
         {/* <Link href={`/device?${serialNo}`}> */}
         <td className='text-left'>
             <h3 className='text-xs'>{serialNo}</h3></td>

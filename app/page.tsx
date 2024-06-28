@@ -66,9 +66,8 @@ export default function Home() {
               <button>&lt;</button>
               {
                 [...Array(pageCount)].map((item,index)=>{
-                  console.log(index,"index")
                   return(
-                    <button onClick={()=>setCurrentPage(index+1)} className={`${currentPage==index+1 ? "border-2" : ""} border-slate-200  p-1 ml-2`}>{index+1}</button>
+                    <button key={index} onClick={()=>setCurrentPage(index+1)} className={`${currentPage==index+1 ? "border-2" : ""} border-slate-200  p-1 ml-2`}>{index+1}</button>
                   )
                 })
               }
