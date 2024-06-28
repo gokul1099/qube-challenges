@@ -9,7 +9,8 @@ import Link from "next/link";
 export default function Home() {
   
   const [deviceData,setDeviceData] = React.useState<Appliance[]>([])
-
+  const [pageCount,setPageCount] = React.useState(5)
+  const [currentPage,setCurrentPage] = React.useState(1)
   useEffect(()=>{
     const getData = async()=>{
       try{
@@ -47,8 +48,33 @@ export default function Home() {
       </div>
       {/** Device List Table Header*/}
       <div className="flex flex-col bg-white m-5 p-3">
-        <div className="mb-5">
-          <input placeholder="Search" className="border-2"/>
+        <div className="flex flex-row justify-between items-center mb-5">
+          <div>
+           <input placeholder="Search" className="border-2"/>
+          </div>
+          <div className="flex flex-row mr-24">
+            <div>
+                Show 
+                <select className="border-2 p-1 ml-3" onChange={(event)=>setPageCount(Number.parseInt(event.target.value))}>
+                  <option>5</option>
+                  <option>10</option>
+                  <option>15</option>
+                  <option>20</option>
+                </select>
+            </div>
+              <div className="flex flex-row items-center ml-4">
+              <button>&lt;</button>
+              {
+                [...Array(pageCount)].map((item,index)=>{
+                  console.log(index,"index")
+                  return(
+                    <button onClick={()=>setCurrentPage(index+1)} className={`${currentPage==index+1 ? "border-2" : ""} border-slate-200  p-1 ml-2`}>{index+1}</button>
+                  )
+                })
+              }
+               <button>&gt;</button>
+            </div>
+          </div>
         </div>
         <div className="flex overflow-x-auto">
           <table className="w-full text-left">
@@ -57,7 +83,7 @@ export default function Home() {
                 {
                   DEVICE_LIST_HEADER?.map((header)=>{
                     return(
-                        <th>{header}</th>
+                        <th key={`${header}`}>{header}</th>
                     )
                   })
                 }
@@ -67,9 +93,9 @@ export default function Home() {
         
           <tbody>
               {
-                deviceData?.map((device)=>{
+                deviceData?.splice(currentPage, currentPage*pageCount).map((device)=>{
                   return(
-                    <TableItem {...device}/>
+                    <TableItem key={device.serialNo} {...device}/>
                   )
                 })
               }
