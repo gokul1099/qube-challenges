@@ -29,7 +29,7 @@ function Device() {
   },[params])
   return (
     <div className='flex flex-col'>
-      <div className='p-3'><h3>Devices    &gt;   {deviceData?.serialNo}</h3></div>
+      <div className='p-5'><h3>Devices    &gt;   {deviceData?.serialNo}</h3></div>
       <div className='bg-white p-5 flex flex-row flex-wrap justify-between border-b-2'>
         <div>
           <h1>{deviceData?.serialNo}</h1>

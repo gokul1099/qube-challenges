@@ -46,11 +46,11 @@ export default function Home() {
       </div>
       {/** Device List Table Header*/}
       <div className="flex flex-col bg-white m-5 p-3">
-        <div className="flex flex-row justify-between items-center mb-5">
+        <div className="flex flex-row justify-between flex-wrap items-center mb-5">
           <div>
            <input placeholder="Search" className="border-2"/>
           </div>
-          <div className="flex flex-row mr-24">
+          <div className="flex flex-row flex-wrap mr-24">
             <div>
                 Show 
                 <select className="border-2 p-1 ml-3" onChange={(event)=>setPageCount(Number.parseInt(event.target.value))}>
