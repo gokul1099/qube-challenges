@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(()=>{
     const getData = async()=>{
       try{
-        const res = await fetch(`http://0.0.0.0:3001/api/v1/appliances`)
+        const res = await fetch(`${process.env.BASE_URL}/api/v1/appliances`)
         const data =await res.json()
         setDeviceData(data?.appliances)
       }
