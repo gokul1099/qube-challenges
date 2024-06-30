@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "start-server":"cd server && npm install && prism mock -h 0.0.0.0 -p 3001 ./FrontEnd_Hiring_Challenge_APIs.yml"
+    "start-server":"cd server && npm install && prism mock -h 0.0.0.0 -p 3001 ./mock.yml"
   },
   "dependencies": {
     "react": "^18",

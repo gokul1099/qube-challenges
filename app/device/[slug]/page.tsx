@@ -2,11 +2,11 @@
 
 import React, { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Device as DeviceType, Location } from '../../types';
-import { DEVICE_PAGE_TITLES } from '../../contants'
-import Shape from "../../assets/shape.svg"
-import Logs from "../../assets/Logs.svg"
-import Chart from "../../assets/ViewPieChart.svg"
+import { Device as DeviceType, Location } from '../../../types';
+import { DEVICE_PAGE_TITLES } from '../../../contants'
+import Shape from "../../../assets/shape.svg"
+import Logs from "../../../assets/Logs.svg"
+import Chart from "../../../assets/ViewPieChart.svg"
 import Image from 'next/image';
 function Device() {
   const params= useSearchParams()
@@ -34,7 +34,7 @@ function Device() {
         <div>
           <h1>{deviceData?.serialNo}</h1>
           <h1 className='text-sm pt-2'>{deviceData?.theatreName}</h1>
-          <h1  className='text-sm pt-2 text-slate-400'>{deviceData?.location.city},{deviceData?.location.state},{deviceData?.location.country}</h1>
+          <h1  className='text-sm pt-2 text-slate-400'>{deviceData?.location?.city},{deviceData?.location?.state},{deviceData?.location?.country}</h1>
           <div className='flex flex-row pt-2'>
             <div className='flex flex-row items-center bg-slate-200 w-20 justify-center rounded-xl'>
               <div className={`${deviceData?.deviceStatus ==="online" ? "bg-green-800" : "bg-red-600"} w-2 h-2 rounded mr-1`}></div>
@@ -81,7 +81,7 @@ function Device() {
 
         <div className='device-detail'>
           <h2>City</h2>
-          <h2>{deviceData?.location.city}, {deviceData?.location.state},{deviceData?.location.country}</h2>
+          <h2>{deviceData?.location?.city}, {deviceData?.location?.state},{deviceData?.location?.country}</h2>
         </div>
 
         <div className='device-detail'>

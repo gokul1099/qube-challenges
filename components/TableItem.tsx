@@ -1,11 +1,11 @@
 import React from 'react'
 import { Appliance } from '../types'
 import { useRouter } from 'next/navigation'
-import { STATUS_COLOR } from '../contants'
+import { STATUS_COLOR,DOWNLOAD_STATUS } from '../contants'
 function TableItem({serialNo,theatreName,location,bandwidth,avgBandwidth,deviceStatus,downloadStatus,osVersion}:Appliance) {
     const router = useRouter()
   return (
-    <tr onClick={()=>router.push(`/device?device=${serialNo}`)} className='cursor-pointer hover:bg-slate-200 border-spacing-5'>
+    <tr onClick={()=>router.push(`/device/${serialNo}`)} className='cursor-pointer hover:bg-slate-200 border-spacing-5'>
         {/* <Link href={`/device?${serialNo}`}> */}
         <td className='text-left'>
             <h3 className='text-xs'>{serialNo}</h3></td>
@@ -27,14 +27,14 @@ function TableItem({serialNo,theatreName,location,bandwidth,avgBandwidth,deviceS
         </td>
         <td  className='text-left '>
             <div className='flex flex-row items-center'>
-                <div className={`h-2 w-2 rounded-xl ${deviceStatus === "Offline" ? "bg-red-600" : "bg-green-600"}`}></div>
+                <div className={`h-2 w-2 rounded-xl ${deviceStatus === "offline" ? "bg-red-600" : "bg-green-600"}`}></div>
                 <h3 className='text-xs ml-1'>{deviceStatus}</h3>
             </div>
             
         </td>
         <td  className='text-left '>
             <div className='flex flex-row items-center'>
-                <div className={`h-2 w-2 rounded-xl ${STATUS_COLOR[downloadStatus]}`}></div>
+                <div style={{backgroundColor: `${DOWNLOAD_STATUS[downloadStatus]}`}} className="h-2 w-2 rounded-xl"></div>
                 <h3 className='text-xs ml-1'>{downloadStatus}</h3>
             </div>
             

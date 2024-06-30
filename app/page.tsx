@@ -7,8 +7,9 @@ import React, { useEffect } from "react";
 export default function Home() {
   
   const [deviceData,setDeviceData] = React.useState<Appliance[]>([])
-  const [pageCount,setPageCount] = React.useState(5)
+  const [pageCount,setPageCount] = React.useState(5) 
   const [currentPage,setCurrentPage] = React.useState(1)
+ 
   useEffect(()=>{
     const getData = async()=>{
       try{
@@ -23,6 +24,8 @@ export default function Home() {
 
     getData()
   },[])
+ 
+  console.log(deviceData,"de")
   return (
     <main className="flex flex-col">
       {/** Header Component */}
@@ -36,7 +39,7 @@ export default function Home() {
               return(
                 <div className="mr-10" key={`${status}`}>
                   <div className="flex flex-row items-center">
-                    <div className={`w-2 h-2 m-1 rounded ${STATUS_COLOR[status]}`}></div>
+                    <div style={{backgroundColor: `${STATUS_COLOR[status]}`}} className={`w-2 h-2 m-1 rounded`}></div>
                     <h2 className="text-sm">1 {status}</h2>
                   </div>
                 </div>
@@ -56,14 +59,14 @@ export default function Home() {
                 <select className="border-2 p-1 ml-3" onChange={(event)=>setPageCount(Number.parseInt(event.target.value))}>
                   <option>5</option>
                   <option>10</option>
-                  <option>15</option>
-                  <option>20</option>
                 </select>
             </div>
+            {
+              deviceData?.length > 0 && deviceData?.length%pageCount !== 1 ?
               <div className="flex flex-row items-center ml-4">
               <button>&lt;</button>
               {
-                [...Array(pageCount)].map((item,index)=>{
+                [...Array(deviceData?.length%pageCount)].map((item,index)=>{
                   return(
                     <button key={index} onClick={()=>setCurrentPage(index+1)} className={`${currentPage==index+1 ? "border-2" : ""} border-slate-200  p-1 ml-2`}>{index+1}</button>
                   )
@@ -71,6 +74,9 @@ export default function Home() {
               }
                <button>&gt;</button>
             </div>
+            :null
+            }
+              
           </div>
         </div>
         <div className="flex overflow-x-auto">
@@ -90,7 +96,7 @@ export default function Home() {
         
           <tbody>
               {
-                deviceData?.splice(currentPage, currentPage*pageCount).map((device)=>{
+                deviceData?.splice((currentPage-1)*pageCount, currentPage*pageCount).map((device)=>{
                   return(
                     <TableItem key={device.serialNo} {...device}/>
                   )

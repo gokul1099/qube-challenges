@@ -1,23 +1,24 @@
 export const STATUS = [
     "Failed",
-    "Stalled",
-    "Archived",
     "Cancelled",
     "Scheduled",
-    "Unarchiving",
     "Downloading",
     "Downloaded"
 ]
 
 export const STATUS_COLOR:{[key: string] : string} = {
-    "Failed" :"bg-red-600",
-    "Stalled":"bg-red-600",
-    "Archived":"bg-red-600",
-    "Cancelled":"bg-yellow-500",
-    "Scheduled":"bg-yellow-500",
-    "Unarchiving":"bg-blue-700",
-    "Downloading":"bg-blue-700",
-    "Downloaded":"bg-green-800"
+    "Failed" :"red",
+    "Cancelled":"yellow",
+    "Scheduled":"gray",
+    "Downloading":"#0080FF",
+    "Downloaded":"green"
+}
+
+export const DOWNLOAD_STATUS:{[key:string]:string}={
+    "failed":"red",
+    "downloading":"#0080FF",
+    "cancelled":"yellow",
+    "succeeded":"green"
 }
 export const DEVICE_LIST_HEADER = [
     "Device Serial",
