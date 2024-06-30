@@ -4,12 +4,15 @@ import TableItem from "../components/TableItem";
 import { STATUS,STATUS_COLOR,DEVICE_LIST_HEADER } from "../contants";
 import { Appliance } from "../types";
 import React, { useEffect } from "react";
+import Search from "../assets/Search.svg"
+import Filter from "../assets/filter.svg"
+import Image from "next/image";
 export default function Home() {
   
   const [deviceData,setDeviceData] = React.useState<Appliance[]>([])
   const [pageCount,setPageCount] = React.useState(5) 
   const [currentPage,setCurrentPage] = React.useState(1)
- 
+  const totalPages = Math.ceil(deviceData?.length / pageCount)
   useEffect(()=>{
     const getData = async()=>{
       try{
@@ -25,7 +28,6 @@ export default function Home() {
     getData()
   },[])
  
-  console.log(deviceData,"de")
   return (
     <main className="flex flex-col">
       {/** Header Component */}
@@ -50,9 +52,17 @@ export default function Home() {
       {/** Device List Table Header*/}
       <div className="flex flex-col bg-white m-5 p-3">
         <div className="flex flex-row justify-between flex-wrap items-center mb-5">
-          <div>
-           <input placeholder="Search" className="border-2"/>
+          <div className="flex flex-wrap flex-row">
+              <div className="flex flex-wrap">
+                <input placeholder="Search" className="border-2 border-r-0"/>
+                <Image src={Search} alt="Search" className="border-2 border-l-0"/>
+              </div>
+              <div className="flex flex-row ml-4 items-center bg-slate-200 p-2 rounded-xl">
+                <Image src={Filter} alt="filter" className="mr-2" />
+                <h3 className="text-sm">Filter</h3>
+              </div>
           </div>
+         
           <div className="flex flex-row flex-wrap mr-24">
             <div>
                 Show 
@@ -61,22 +71,18 @@ export default function Home() {
                   <option>10</option>
                 </select>
             </div>
-            {
-              deviceData?.length > 0 && deviceData?.length%pageCount !== 1 ?
+           
               <div className="flex flex-row items-center ml-4">
               <button>&lt;</button>
               {
-                [...Array(deviceData?.length%pageCount)].map((item,index)=>{
+                [...Array(5)].map((item,index)=>{
                   return(
-                    <button key={index} onClick={()=>setCurrentPage(index+1)} className={`${currentPage==index+1 ? "border-2" : ""} border-slate-200  p-1 ml-2`}>{index+1}</button>
+                    <button key={index} onClick={()=>setCurrentPage(index+1)} className={`${currentPage==index+1 ? "border-2 bg-slate-200" : ""} border-slate-200  p-1 ml-2`}>{index+1}</button>
                   )
                 })
               }
                <button>&gt;</button>
-            </div>
-            :null
-            }
-              
+            </div>          
           </div>
         </div>
         <div className="flex overflow-x-auto">
